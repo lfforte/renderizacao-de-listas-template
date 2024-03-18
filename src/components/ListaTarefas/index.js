@@ -22,14 +22,12 @@ export function ListaTarefas() {
   const adicionaTarefa = () => {
     setTarefas([...tarefas, novaTarefa]);
     setNovaTarefa('');
-    console.log(tarefas.id);
   };
 
   const removeTarefa = (id) => {
     /* const listaFiltrada = lista.filter((cadaTarefa) => cadaTarefa !== item); */
     setTarefas(tarefas.filter((tarefa, i) => i !== id))
     /* setLista(listaFiltrada); */
-    console.log(tarefas.id);
   };
 
   return (
