@@ -11,21 +11,25 @@ import {
 import bin from "../../assets/bin.png";
 
 export function ListaTarefas() {
-  const [novaTarefa, setNovaTarefa] = useState("");
-  const [lista, setLista] = useState([]);
+  const [tarefas, setTarefas] = useState([]);
+  const [novaTarefa, setNovaTarefa] = useState('');
 
 
-  const onChangeTarefa = (event) => {
-    setNovaTarefa(event.target.value);
-  };
+  /*   const onChangeTarefa = (event) => {
+      setTarefa(event.target.value);
+    }; */
 
   const adicionaTarefa = () => {
-    setLista([...lista, novaTarefa]);
+    setTarefas([...tarefas, novaTarefa]);
     setNovaTarefa('');
+    console.log(tarefas.id);
   };
-  const removeTarefa = (item) => {
-    const listaFiltrada = lista.filter((cadaTarefa) => cadaTarefa !== item);
-    setLista(listaFiltrada);
+
+  const removeTarefa = (id) => {
+    /* const listaFiltrada = lista.filter((cadaTarefa) => cadaTarefa !== item); */
+    setTarefas(tarefas.filter((tarefa, i) => i !== id))
+    /* setLista(listaFiltrada); */
+    console.log(tarefas.id);
   };
 
   return (
@@ -34,21 +38,21 @@ export function ListaTarefas() {
         <TaskInput
           placeholder="Digite aqui uma tarefa"
           value={novaTarefa}
-          onChange={onChangeTarefa}
+          onChange={(e) => setNovaTarefa(e.target.value)}
         />
         <AddTaskButton onClick={adicionaTarefa}>Adicionar</AddTaskButton>
       </InputContainer>
 
       <ListaContainer>
         <ul>
-          {lista.map((item, id) => {
-            return <Tarefa>
-              <p>{item.toUpperCase()}</p>
-              <RemoveButton onClick={() => removeTarefa(item)}>
+          {tarefas.map((tarefa, id) => (
+            <Tarefa key={id}>
+              <p>{tarefa.toUpperCase()}</p>
+              <RemoveButton onClick={() => removeTarefa(id)}>
                 <img src={bin} alt="" width="16px" />
               </RemoveButton>
             </Tarefa>
-          })}
+          ))}
         </ul>
       </ListaContainer>
     </ListaTarefasContainer>
